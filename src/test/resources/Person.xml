@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Person>
+  <name>dummyName</name>
+  <address>dummyAddress</address>
+  <id>123</id>
+</Person>

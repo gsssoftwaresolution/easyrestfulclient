@@ -1,0 +1,5 @@
+{
+  "name":"application1",
+  "id":1,
+  "address":"dummyAddress1"
+}
