@@ -13,17 +13,17 @@ It is java library developed on top of Apache HTTP library and JDK executor fram
 ### Add Repository to project POM.xml
 
 ```xml
-	
+
 	<repositories>
 		<repository>
-          <id>EasyRestFulclientRepository</id>
-          <url>https://repo1.maven.org/maven2</url>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-     </repository>
-     ...
-  </repositories>
+			<id>EasyRestFulclientRepository</id>
+			<url>https://repo1.maven.org/maven2</url>
+				<releases>
+					<enabled>true</enabled>
+				</releases>
+		</repository>
+		...
+	</repositories>
     
 ```
   
@@ -55,15 +55,14 @@ Likewise upon Accept header value, library build response either from json or xm
 #### GET  
 
 ```java
-      
-     Map<String,String> headers=new HashMap<>();
-     String requestUrl="http://localhost:8080/getTestPage";
-	  headers.put(Constant.CONTENT_TYPE, Constant.MEDIATYPE_JSON);
-	  headers.put(Constant.ACCEPT, Constant.MEDIATYPE_JSON);
-	  responseClass=Response.class;
-	  requestBody=null;
-	  String httpMethod=Constant.GET_METHOD;
-	  Request request=new GetRequest(requestUrl,headers, responseClass);
+    
+	Map<String,String> headers=new HashMap<>();
+	String requestUrl="http://localhost:8080/getTestPage";
+	headers.put(Constant.CONTENT_TYPE, Constant.MEDIATYPE_JSON);
+	headers.put(Constant.ACCEPT, Constant.MEDIATYPE_JSON);
+	responseClass=Response.class;
+	String httpMethod=Constant.GET_METHOD;
+	Request request=new GetRequest(requestUrl,headers, responseClass);
 
 ```
 
@@ -71,14 +70,14 @@ Likewise upon Accept header value, library build response either from json or xm
 
 ```java
       
-     Map<String,String> headers=new HashMap<>();
-     String requestUrl="http://localhost:8080/getTestPage";
-	  headers.put(Constant.CONTENT_TYPE, Constant.MEDIATYPE_JSON);
-	  headers.put(Constant.ACCEPT, Constant.MEDIATYPE_JSON);
-	  responseClass=Response.class;
-	  requestBody=new RequestBody();
-	  String httpMethod=Constant.GET_METHOD;
-	  Request request=new PostRequest(requestUrl,headers, responseClass);
+	Map<String,String> headers=new HashMap<>();
+	String requestUrl="http://localhost:8080/getTestPage";
+	headers.put(Constant.CONTENT_TYPE, Constant.MEDIATYPE_JSON);
+	headers.put(Constant.ACCEPT, Constant.MEDIATYPE_JSON);
+	responseClass=Response.class;
+	requestBody=new RequestBody();
+	String httpMethod=Constant.GET_METHOD;
+	Request request=new PostRequest(requestUrl, headers, requestBody, responseClass);
 
 ```
 
@@ -88,8 +87,44 @@ Likewise upon Accept header value, library build response either from json or xm
 
 	Response response=(Response)restClient.getData(request);
 
-
 ```
 
+### Make multiple concurrent requests
+
+```java
+
+	//  First request	  
+	requestUrl="http://localhost:8080/getPerson1";
+	headers.put(Constant.CONTENT_TYPE, Constant.MEDIATYPE_JSON);
+	headers.put(Constant.ACCEPT, Constant.MEDIATYPE_JSON);
+	responseClass=Response1.class;
+	requestBody=new RequestBody1();
+	((RequestBody1)requestBody).setName("postDummyName1");
+	Request request1=new PostRequest(requestUrl,headers, requestBody, responseClass);
+	  
+	// Second request
+	requestUrl="http://localhost:8080/getPerson2";
+	headers.put(Constant.CONTENT_TYPE, Constant.MEDIATYPE_JSON);
+	headers.put(Constant.ACCEPT, Constant.MEDIATYPE_JSON);
+	responseClass=Response2.class;
+	Request request2=new GetRequest(requestUrl,headers, responseClass);
+	  
+	// Third request 
+	requestUrl="http://localhost:8080/getPerson3";
+	headers.put(Constant.CONTENT_TYPE, Constant.MEDIATYPE_JSON);
+	headers.put(Constant.ACCEPT, Constant.MEDIATYPE_JSON);
+	responseClass=Response3.class;
+	requestBody=new RequestBody3();
+	((RequestBody3)requestBody).setName("postDummyName3");
+	Request request3=new PostRequest(requestUrl, headers, requestBody, responseClass);
+	  
+	List<Request> requests=new ArrayList<Request>();
+	requests.add(request1);
+	requests.add(request2);
+	requests.add(request3);
+	  
+	List<Object> responses=(List<Object>)restClient.getData(requests);
+	
+```
 
 
