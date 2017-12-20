@@ -6,7 +6,7 @@
   <artifactId>easyrestfulclient</artifactId>
   <version>1.0.0</version>
   <packaging>jar</packaging>
-
+  <description>Java Http Client for MicroServices</description>
   <name>restclient</name>
   <url>http://maven.apache.org</url>
 
@@ -56,10 +56,10 @@
   </licenses>
   <developers>
     <developer>
-      <name>G Javh</name>
+      <name>Gaurav Javheri</name>
       <email>gsssoftwaresolution@gmail.com</email>
       <organization>Gss Software</organization>
-      <organizationUrl>http://www.gsssoftware.com</organizationUrl>
+      <organizationUrl>http://www.gsssoftwaresolution.com</organizationUrl>
     </developer>
   </developers> 
   <scm>
@@ -67,6 +67,16 @@
 	  <developerConnection>scm:git:https://github.com/gsssoftwaresolution/easyrestfulclient.git</developerConnection>
 	  <url>https://github.com/gsssoftwaresolution/easyrestfulclient.git</url>
   </scm>
+  <distributionManagement>
+  	<snapshotRepository>
+   	 	<id>ossrh</id>
+    	<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+  	</snapshotRepository>
+  	<repository>
+    	<id>ossrh</id>
+    	<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+  	</repository>
+  </distributionManagement>  
   <build>
     <plugins>
       <plugin>
@@ -103,6 +113,31 @@
           </goals>
         </execution>
       </executions>
+    </plugin>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-gpg-plugin</artifactId>
+      <version>1.5</version>
+      <executions>
+        <execution>
+          <id>sign-artifacts</id>
+          <phase>verify</phase>
+          <goals>
+            <goal>sign</goal>
+          </goals>
+        </execution>
+      </executions>
+    </plugin>
+    <plugin>
+      <groupId>org.sonatype.plugins</groupId>
+      <artifactId>nexus-staging-maven-plugin</artifactId>
+      <version>1.6.7</version>
+      <extensions>true</extensions>
+      <configuration>
+        <serverId>ossrh</serverId>
+        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+      </configuration>
     </plugin>
     </plugins>
   </build>
