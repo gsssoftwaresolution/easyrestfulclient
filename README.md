@@ -61,7 +61,6 @@ Likewise upon Accept header value, library build response either from json or xm
 	headers.put(Constant.CONTENT_TYPE, Constant.MEDIATYPE_JSON);
 	headers.put(Constant.ACCEPT, Constant.MEDIATYPE_JSON);
 	responseClass=Response.class;
-	String httpMethod=Constant.GET_METHOD;
 	Request request=new GetRequest(requestUrl,headers, responseClass);
 
 ```
@@ -76,7 +75,6 @@ Likewise upon Accept header value, library build response either from json or xm
 	headers.put(Constant.ACCEPT, Constant.MEDIATYPE_JSON);
 	responseClass=Response.class;
 	requestBody=new RequestBody();
-	String httpMethod=Constant.GET_METHOD;
 	Request request=new PostRequest(requestUrl, headers, requestBody, responseClass);
 
 ```
@@ -93,7 +91,7 @@ Likewise upon Accept header value, library build response either from json or xm
 
 ```java
 
-	//  First request	  
+	//  First request	with JSON format  
 	requestUrl="http://localhost:8080/getPerson1";
 	headers.put(Constant.CONTENT_TYPE, Constant.MEDIATYPE_JSON);
 	headers.put(Constant.ACCEPT, Constant.MEDIATYPE_JSON);
@@ -102,14 +100,14 @@ Likewise upon Accept header value, library build response either from json or xm
 	((RequestBody1)requestBody).setName("postDummyName1");
 	Request request1=new PostRequest(requestUrl,headers, requestBody, responseClass);
 	  
-	// Second request
+	// Second request with XML formats
 	requestUrl="http://localhost:8080/getPerson2";
-	headers.put(Constant.CONTENT_TYPE, Constant.MEDIATYPE_JSON);
-	headers.put(Constant.ACCEPT, Constant.MEDIATYPE_JSON);
+	headers.put(Constant.CONTENT_TYPE, Constant.MEDIATYPE_XML);
+	headers.put(Constant.ACCEPT, Constant.MEDIATYPE_XML);
 	responseClass=Response2.class;
 	Request request2=new GetRequest(requestUrl,headers, responseClass);
 	  
-	// Third request 
+	// Third request with JSON format
 	requestUrl="http://localhost:8080/getPerson3";
 	headers.put(Constant.CONTENT_TYPE, Constant.MEDIATYPE_JSON);
 	headers.put(Constant.ACCEPT, Constant.MEDIATYPE_JSON);
