@@ -18,9 +18,9 @@ It is java library developed on top of Apache HTTP library and JDK executor fram
 		<repository>
 			<id>EasyRestFulclientRepository</id>
 			<url>https://repo1.maven.org/maven2</url>
-				<releases>
-					<enabled>true</enabled>
-				</releases>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
 		</repository>
 		...
 	</repositories>
